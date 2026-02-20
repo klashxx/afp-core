@@ -1,24 +1,32 @@
-name: Sync to Personal Repo
+name: Sync to klashxx
+
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+
 jobs:
-  sync:
-    if: github.repository_owner != 'klashxx'
+  sync-to-user:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout del código de la Organización
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-      - name: Push to Personal Repo
-        env:
-          PAT: ${{ secrets.PERSONAL_TOKEN }}
+          fetch-depth: 0 # Descarga todo el historial para poder hacer push force correctamente
+
+      - name: Sincronizar con klashxx/afp-core
         run: |
+          # 1. Configurar identidad de Git
           git config --global user.name "klashxx"
           git config --global user.email "klashxx@gmail.com"
-          git remote remove personal 2>/dev/null || true
-          git remote add personal https://klashxx:${PAT}@github.com/klashxx/afp-core.git
-          git push personal main --force
+          
+          # 2. Añadir el repositorio destino como remoto
+          # Usamos el token guardado en los secretos de la organización
+          git remote add target https://oauth2:${{ secrets.PERSONAL_TOKEN }}@github.com/klashxx/afp-core.git
+          
+          # 3. Empujar los cambios (Modo Espejo)
+          # El flag --force asegura que tu repo quede idéntico al de la org.
+          # Si NO quieres sobrescribir tu historial, quita el '--force', 
+          # pero podría fallar si tienes cambios locales.
+          git push target main --force
