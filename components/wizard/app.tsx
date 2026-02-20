@@ -629,7 +629,7 @@ export function WizardApp() {
           <Card>
             <CardHeader>
               <CardTitle className="text-xl">CSV Import</CardTitle>
-              <CardDescription>Template -> subida -> validacion server-side -> preview -> apply</CardDescription>
+              <CardDescription>Template &rarr; subida &rarr; validacion server-side &rarr; preview &rarr; apply</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               <Button variant="outline" onClick={() => void downloadCsvTemplate()} disabled={busy === "template"}>
