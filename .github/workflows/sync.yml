@@ -1,0 +1,25 @@
+name: Sync to Personal Repo
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  sync:
+    if: github.repository_owner != 'klashxx'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Personal Repo
+        run: |
+          git config --global user.name "klashxx"
+          git config --global user.email "klashxx@gmail.com"
+          git remote add personal https://${{ secrets.PERSONAL_TOKEN }}@://github.com
+          git push personal main --force
