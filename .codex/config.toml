@@ -1,0 +1,5 @@
+approval_policy = "untrusted"     # o "on-request"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = false            # actívalo solo si hace falta

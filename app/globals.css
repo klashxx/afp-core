@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+html[data-variant="agro-premium"] {
+  --background: 42 56% 97%;
+  --foreground: 152 36% 13%;
+  --card: 0 0% 100%;
+  --card-foreground: 152 36% 14%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 152 36% 14%;
+  --primary: 154 57% 35%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 38 78% 60%;
+  --secondary-foreground: 154 40% 19%;
+  --muted: 47 60% 92%;
+  --muted-foreground: 152 18% 34%;
+  --accent: 198 61% 51%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 75% 52%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 144 30% 82%;
+  --input: 144 24% 87%;
+  --ring: 154 57% 35%;
+  --chart-1: 154 57% 35%;
+  --chart-2: 198 61% 51%;
+  --chart-3: 38 78% 60%;
+  --chart-4: 0 67% 56%;
+  --radius: 1rem;
+}
+
+html[data-variant="copilot-sleek"] {
+  --background: 210 35% 10%;
+  --foreground: 210 40% 96%;
+  --card: 216 30% 14%;
+  --card-foreground: 210 38% 96%;
+  --popover: 216 30% 14%;
+  --popover-foreground: 210 38% 96%;
+  --primary: 188 86% 48%;
+  --primary-foreground: 214 35% 8%;
+  --secondary: 224 22% 24%;
+  --secondary-foreground: 210 40% 96%;
+  --muted: 220 25% 20%;
+  --muted-foreground: 215 20% 74%;
+  --accent: 168 79% 42%;
+  --accent-foreground: 214 35% 8%;
+  --destructive: 0 76% 57%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 20% 27%;
+  --input: 220 20% 25%;
+  --ring: 188 86% 48%;
+  --chart-1: 188 86% 48%;
+  --chart-2: 168 79% 42%;
+  --chart-3: 41 92% 57%;
+  --chart-4: 347 84% 60%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at 10% 10%, hsl(var(--primary) / 0.2), transparent 35%),
+      radial-gradient(circle at 86% 20%, hsl(var(--secondary) / 0.25), transparent 40%),
+      radial-gradient(circle at 50% 100%, hsl(var(--accent) / 0.2), transparent 35%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-title), sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  body,
+  input,
+  button,
+  textarea,
+  select {
+    font-family: var(--font-body), sans-serif;
+  }
+}
+
+@layer utilities {
+  .surface {
+    @apply rounded-3xl border bg-card/90 backdrop-blur;
+  }
+}
