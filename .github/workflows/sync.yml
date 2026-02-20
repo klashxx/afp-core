@@ -13,20 +13,16 @@ jobs:
       - name: Checkout del código de la Organización
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Descarga todo el historial para poder hacer push force correctamente
+          fetch-depth: 0
+          persist-credentials: false # <--- ¡ESTO ES LO QUE ARREGLA EL ERROR!
 
       - name: Sincronizar con klashxx/afp-core
         run: |
-          # 1. Configurar identidad de Git
           git config --global user.name "klashxx"
           git config --global user.email "klashxx@gmail.com"
           
-          # 2. Añadir el repositorio destino como remoto
-          # Usamos el token guardado en los secretos de la organización
-          git remote add target https://oauth2:${{ secrets.PERSONAL_TOKEN }}@github.com/klashxx/afp-core.git
+          # Usamos tu usuario y el token directamente en la URL
+          git remote add target https://klashxx:${{ secrets.PERSONAL_TOKEN }}@github.com/klashxx/afp-core.git
           
-          # 3. Empujar los cambios (Modo Espejo)
-          # El flag --force asegura que tu repo quede idéntico al de la org.
-          # Si NO quieres sobrescribir tu historial, quita el '--force', 
-          # pero podría fallar si tienes cambios locales.
+          # Empujar
           git push target main --force
